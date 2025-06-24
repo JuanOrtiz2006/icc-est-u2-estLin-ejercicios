@@ -15,7 +15,15 @@ public class LogicaClasificacion {
      *         Salida: "odnuM aloH"
      */
     public String invertirCadena(String texto) {
-        return "";
+        Stack<Character> pila = new Stack<>();
+        for(Character caracter: texto.toCharArray()){
+            pila.push(caracter);
+        }
+        StringBuilder resultado = new StringBuilder();
+        while(!pila.isEmpty()){
+            resultado.append(pila.pop());
+        }
+        return resultado.toString();
     }
 
     /**
@@ -30,7 +38,26 @@ public class LogicaClasificacion {
      *         Salida: true
      */
     public boolean validarSimbolos(String expresion) {
-        return false;
+        Stack<Character> pila = new Stack<>();
+        boolean resultado = true;
+        for(Character simbolo: expresion.toCharArray()){
+            if (simbolo=='{' || simbolo=='[' || simbolo=='('){
+                pila.push(simbolo);
+            } else if(simbolo=='}' || simbolo==']' || simbolo==')'){
+                if(pila.isEmpty()){
+                    return false;
+                }
+                char ultimo = pila.pop();
+                if((simbolo=='}' && ultimo!='{') || (simbolo==']' && ultimo!='[') || (simbolo==')' && ultimo!='('))
+                {
+                    return false;
+                } else{
+                    resultado = true;
+                }
+            }
+
+        }
+        return resultado;
     }
 
     /**
@@ -43,8 +70,26 @@ public class LogicaClasificacion {
      *         Salida: [1, 2, 3, 4]
      */
     public List<Integer> ordenarPila(Stack<Integer> pila) {
+        Stack<Integer> pilaAux = new Stack<>();
+        List<Integer> ordenado = new ArrayList<>();
+        while(!pila.isEmpty()){
+            int temp = pila.pop();
+            while(!pilaAux.isEmpty()){
+                if(pilaAux.peek()> temp){
+                    pila.push(pilaAux.pop());
+                } else{
+                    break;
+                }
+            }
+            pilaAux.push(temp);
+        }
 
-        return new ArrayList<>();
+        while(!pilaAux.isEmpty()){
+            ordenado.add(pila.pop());
+        }
+        return ordenado;
+
+        
     }
 
     /**
