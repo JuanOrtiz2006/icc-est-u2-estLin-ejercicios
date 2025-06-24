@@ -39,25 +39,22 @@ public class LogicaClasificacion {
      */
     public boolean validarSimbolos(String expresion) {
         Stack<Character> pila = new Stack<>();
-        boolean resultado = true;
-        for(Character simbolo: expresion.toCharArray()){
-            if (simbolo=='{' || simbolo=='[' || simbolo=='('){
+        for (char simbolo : expresion.toCharArray()) {
+            if (simbolo == '{' || simbolo == '[' || simbolo == '(') {
                 pila.push(simbolo);
-            } else if(simbolo=='}' || simbolo==']' || simbolo==')'){
-                if(pila.isEmpty()){
+            } else if (simbolo == '}' || simbolo == ']' || simbolo == ')') {
+                if (pila.isEmpty()) {
                     return false;
                 }
                 char ultimo = pila.pop();
-                if((simbolo=='}' && ultimo!='{') || (simbolo==']' && ultimo!='[') || (simbolo==')' && ultimo!='('))
-                {
+                if ((simbolo == '}' && ultimo != '{') ||
+                    (simbolo == ']' && ultimo != '[') ||
+                    (simbolo == ')' && ultimo != '(')) {
                     return false;
-                } else{
-                    resultado = true;
                 }
             }
-
         }
-        return resultado;
+        return pila.isEmpty();
     }
 
     /**
