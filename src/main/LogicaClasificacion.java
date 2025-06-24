@@ -75,7 +75,7 @@ public class LogicaClasificacion {
         // Ordenar usando pila auxiliar
         while (!pila.isEmpty()) {
             int temp = pila.pop();
-            while (!pilaAux.isEmpty() && pilaAux.peek() <    temp) {
+            while (!pilaAux.isEmpty() && pilaAux.peek() < temp) {
                 pila.push(pilaAux.pop());
             }
             pilaAux.push(temp);
@@ -98,7 +98,24 @@ public class LogicaClasificacion {
      *         Salida: [2, 4, 6, 1, 3, 5]
      */
     public List<Integer> clasificarPorParidad(LinkedList<Integer> original) {
-
-        return new ArrayList<>();
+        LinkedList<Integer> pares = new LinkedList<>();
+        LinkedList<Integer> impares = new LinkedList<>();
+        for(Integer numero: original){
+            if (numero%2 == 0){
+                pares.add(numero);
+            } else{
+                impares.add(numero);
+            }
+        }
+        if (pares.isEmpty() && impares.isEmpty()) {
+            return original;
+        } else if (pares.isEmpty()) {
+            return impares;
+        } else if (impares.isEmpty()) {
+            return pares;
+        } else{
+            pares.addAll(impares);
+            return pares;
+        }
     }
 }
