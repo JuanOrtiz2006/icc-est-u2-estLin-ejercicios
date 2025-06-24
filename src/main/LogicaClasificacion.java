@@ -72,24 +72,19 @@ public class LogicaClasificacion {
     public List<Integer> ordenarPila(Stack<Integer> pila) {
         Stack<Integer> pilaAux = new Stack<>();
         List<Integer> ordenado = new ArrayList<>();
-        while(!pila.isEmpty()){
+        // Ordenar usando pila auxiliar
+        while (!pila.isEmpty()) {
             int temp = pila.pop();
-            while(!pilaAux.isEmpty()){
-                if(pilaAux.peek()> temp){
-                    pila.push(pilaAux.pop());
-                } else{
-                    break;
-                }
+            while (!pilaAux.isEmpty() && pilaAux.peek() <    temp) {
+                pila.push(pilaAux.pop());
             }
             pilaAux.push(temp);
         }
-
-        while(!pilaAux.isEmpty()){
-            ordenado.add(pila.pop());
+        // Pasar los elementos ordenados a la lista
+        while (!pilaAux.isEmpty()) {
+            ordenado.add(pilaAux.pop());
         }
-        return ordenado;
-
-        
+        return ordenado;        
     }
 
     /**
